@@ -1,8 +1,17 @@
 # PublicExceptionExtension
-Short description and motivation.
+Custom public error template
 
 ## Usage
-How to use my plugin.
+```ruby
+# config/initializers/public_exception.rb
+
+Rails.application.config.public_exception_template = -> (request, status) do
+  if request.original_fullpath.start_with?('/admin')
+    "/admin/#{status}.html" # => render /public/admin/xxx.html
+  end
+end
+
+```
 
 ## Installation
 Add this line to your application's Gemfile:
